@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesebrera Digital - Gestión Equina</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2e7d32">
+</head>
+<body>
+    <header>
+        <h1>Pesebrera Digital v1.0</h1>
+        <button id="installApp" style="display:none;">Instalar App</button>
+    </header>
+
+    <nav>
+        <button onclick="showSection('caballos')">Ejemplares</button>
+        <button onclick="showSection('salud')">Sanidad</button>
+        <button onclick="showSection('inventario')">Inventario</button>
+        <button onclick="showSection('pagos')">Caja/DIAN</button>
+    </nav>
+
+    <main id="content">
+        <section id="caballos">
+            <h2>Registro de Ejemplares (CCC)</h2>
+            <form id="horseForm">
+                <input type="text" id="nombre" placeholder="Nombre del Ejemplar" required>
+                <select id="andar">
+                    <option value="Paso Fino">Paso Fino Colombiano</option>
+                    <option value="Trocha">Trocha Pura</option>
+                    <option value="Trocha y Galope">Trocha y Galope</option>
+                    <option value="Trote y Galope">Trote y Galope</option>
+                </select>
+                <input type="text" id="microchip" placeholder="N° Microchip ISO">
+                <button type="submit">Guardar en Base de Datos Local</button>
+            </form>
+            <div id="horseList" class="card-container"></div>
+        </section>
+
+        <section id="inventario" style="display:none;">
+            <h2>Control de Suministros</h2>
+            <p>Marcas sugeridas: Italcol Brío, Solla Campeón, Finca Cinta Azul.[3]</p>
+            <div id="stockStatus">
+                <div class="card">Concentrado: <span id="valStock">40</span> bultos</div>
+            </div>
+        </section>
+
+        <section id="pagos" style="display:none;">
+            <h2>Pagos y Facturación</h2>
+            <div class="qr-placeholder">
+                <p>Generar QR Interoperable (Bre-B)</p>
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PagoPesebrera" alt="QR">
+            </div>
+            <p><small>Sujeto a normativa de facturación electrónica DIAN.[5]</small></p>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>
